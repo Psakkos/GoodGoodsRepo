@@ -1,0 +1,77 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightpink;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/*index page*/
+
+h1 {
+    color:red;
+    font-size:80px;
+    font-family: arial;
+    text-align: center;
+}
+h2 {
+    font-size: 30px;
+    font-family: arial;
+    text-align: center;}
+h3{
+    font-size: 65px;
+    font-family: arial;
+}
+button{
+    font-size: 57px;
+    margin: 0 auto;
+}
+
+/**/
+.row{
+    width: 1200px;
+    height:300px;
+    }
+.row2{
+        width: 1135px;
+        height:73px;
+        background-color: #999999;
+        border: 5px solid black;
+        border-radius: 10px;
+        float: left;
+}
+.item{
+    width: 49%;
+    height: 100%;
+    background-color: #990000;
+    border: 5px solid black;
+    border-radius: 10px;
+    float: left;
+}
+.button1{
+    width: 25%;
+    height: 25%;
+    background-color: #999999;
+    border: 5px solid black;
+    border-radius: 10px;
+    float: left;
+
+}
+.button2{
+    width: 25%;
+    height: 25%;
+    background-color: #999999;
+    border: 5px solid black;
+    border-radius: 10px;
+    float: right;
+
+}
+button3{
+    width:20px;
+    height: 10px;
+    margin: 0 auto;
+    margin-top: 100px;
+    float: center;
+}
