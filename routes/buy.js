@@ -7,20 +7,12 @@ client.on('connect',function(){
     console.log("Connected to redis... on users route");
 });
 
-router.get('/goodsSearch', function (req,res, next){
+router.get('/pickCategory', function (req,res, next){
 
-  res.render('goodsSearch', {json: 'data'});
+  res.render('pickCategory', {json: 'data'});
 });
 
-router.get('/goodsScroll', function (req,res, next){
 
-  res.render('goodsScroll', {json: 'data'});
-});
-
-router.get('/goodsInfo', function (req,res, next){
-
-  res.render('goodsInfo', {json: 'data'});
-});
 
 router.get('/boughtGoods', function (req,res, next){
 
@@ -28,19 +20,86 @@ router.get('/boughtGoods', function (req,res, next){
 });
 
 
-router.get('/keyword/:cat', function (req,res, next){
-    let categoryid= "category:"+req.params.cat;
-    client.hgetall(categoryid,function(err,reply){
-           if(err){
-               console.log(err);
-           }
-           else{
-               console.log(reply);
-               res.render('keyword', reply);
-           }
-       }
-       );
-    //get keyword information
-  res.render('keyword', {json: 'data'});
+router.get('/category/:cat', function (req,res, next){
+    let message= String(req.params.cat);
+  res.render('category', {category: message});
 });
+
+router.get('/item/:cat', function (req,res, next){
+    let category = String(req.params.cat);
+  if(category== "Instruments"){
+      client.keys('item*',function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            let itemlist = {};
+            for(let d=0; d<data.length; d++){
+                if(data[d].category== category){
+                    let item= "catalog"+d;
+                    itemlist[item]= data[d];
+                }
+        }
+        res.render('item', itemlist);
+    };
+
+  });
+}
+  if(category== "Clothes"){
+      client.keys('item*',function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            let itemlist = {};
+            for(let d=0; d<data.length; d++){
+                if(data[d].category== category){
+                    let item= "catalog"+d;
+                    itemlist[item]= data[d];
+                }
+        }
+        res.render('item', itemlist);
+    };
+
+  }
+)};
+  if(category== "Technology"){
+      client.keys('item*',function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            let itemlist = {};
+            for(let d=0; d<data.length; d++){
+                if(data[d].category== category){
+                    let item= "catalog"+d;
+                    itemlist[item]= data[d];
+                }
+        }
+        res.render('item', itemlist);
+    };
+
+  }
+)};
+  if(category== "Appliances"){
+      client.keys('item*',function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            let itemlist = {};
+            for(let d=0; d<data.length; d++){
+                console.log(data[d].category);
+                if(data[d].category== category){
+                    let item= "catalog"+d;
+                    itemlist[item]= data[d];
+                }
+        }
+        res.render('item', itemlist);
+    };
+
+  }
+)};
+});
+
 module.exports = router;

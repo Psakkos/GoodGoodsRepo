@@ -10,10 +10,9 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var sell= require('./routes/sell');
-var app = express();
-    app.use('/sell', sell);
 var buy= require('./routes/buy');
-    app.use('/buy', buy);
+var app = express();
+
 
 
 // view engine setup
@@ -30,7 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/sell', sell);
+app.use('/buy', buy);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

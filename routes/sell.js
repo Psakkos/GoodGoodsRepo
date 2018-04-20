@@ -11,6 +11,9 @@ client.on('connect',function(){
 router.get('/', function (req,res, next){
   res.render('postGoods');
 });
+router.get('/', function (req,res, next){
+  res.render('index');
+});
 router.get('/postGoods', function (req,res, next){
 
   res.render('postGoods');
@@ -36,13 +39,11 @@ router.post('/postGoods', function (req,res){
     let item= req.body.item;
     let seller= req.body.seller;
     let category= req.body.category;
-    let keyword= req.body.keyword;
     let price= req.body.price;
 
-    client.hmset(item, [
+    client.hmset("item"+item, [
         'seller', seller,
         'category', category,
-        'keyword', keyword,
         'price', price,
     ], function(err,reply){
         if(err){
