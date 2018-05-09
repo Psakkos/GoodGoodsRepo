@@ -1,8 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: lightpink;
-}
+  background: linear-gradient(lightpink, red);
+  }
 
 a {
   color: #00B7FF;
@@ -12,11 +12,11 @@ a {
 
 h4{
     color: white;
-    font-size: 20px;
+    font-size: 35px;
     font-family: arial;
 }
 h1 {
-    color:red;
+    color:lightblue;
     font-size:80px;
     font-family: arial;
     text-align: center;
@@ -33,11 +33,10 @@ button{
     font-size: 57px;
     margin: 0 auto;
 }
-
 /**/
 .row{
     width: 1200px;
-    height:300px;
+    height:100px;
     }
 .row2{
         width: 1135px;
@@ -47,12 +46,25 @@ button{
         border-radius: 10px;
         float: left;
 }
+.row3{
+        width: 300px;
+        height:72px;
+        background-color: #999999;
+        border: 5px solid black;
+        border-radius: 10px;
+        float: left;
+}
 .item{
     width: 49%;
     height: 100%;
-    background-color: #990000;
     border: 5px solid black;
     border-radius: 10px;
+    float: left;
+    background: linear-gradient(blue, lightblue);
+}
+.row5{
+    width: 1200px;
+    height:100px;
     float: left;
 }
 .button1{
@@ -79,4 +91,15 @@ button3{
     margin: 0 auto;
     margin-top: 100px;
     float: center;
+}
+button4{
+    width:20px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 100px;
+    float: center;
+}
+itemLink{
+    font-size: 15px;
+    font-family: arial;
 }

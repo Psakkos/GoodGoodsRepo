@@ -41,7 +41,8 @@ router.post('/postGoods', function (req,res){
     let category= req.body.category;
     let price= req.body.price;
 
-    client.hmset("item"+item, [
+    client.hmset("item"+item+category, [
+        'name', item,
         'seller', seller,
         'category', category,
         'price', price,

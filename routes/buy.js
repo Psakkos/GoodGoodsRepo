@@ -13,11 +13,11 @@ router.get('/pickCategory', function (req,res, next){
 });
 
 
-
-router.get('/boughtGoods', function (req,res, next){
-
-  res.render('boughtGoods', {json: 'data'});
+router.delete('/delete/:item',function(req,res){
+    client.del(req.params.item);
+    res.redirect('/boughtGoods')
 });
+
 
 
 router.get('/category/:cat', function (req,res, next){
@@ -25,64 +25,59 @@ router.get('/category/:cat', function (req,res, next){
   res.render('category', {category: message});
 });
 
-router.get('/item/:cat', function (req,res, next){
+router.get('/searchItem/:cat', function (req,res, next){
     let category = String(req.params.cat);
   if(category== "Instruments"){
-      client.keys('item*',function(err, data){
+      client.keys('item*Instruments',function(err, data){
         if(err){
             console.log(err);
         }
         else{
             let itemlist = {};
             for(let d=0; d<data.length; d++){
-                if(data[d].category== category){
                     let item= "catalog"+d;
                     itemlist[item]= data[d];
-                }
         }
-        res.render('item', itemlist);
+        res.render('searchItem', itemlist);
     };
 
   });
 }
   if(category== "Clothes"){
-      client.keys('item*',function(err, data){
+      client.keys('item*Clothes',function(err, data){
         if(err){
             console.log(err);
         }
         else{
             let itemlist = {};
             for(let d=0; d<data.length; d++){
-                if(data[d].category== category){
                     let item= "catalog"+d;
                     itemlist[item]= data[d];
-                }
         }
-        res.render('item', itemlist);
+        console.log(itemlist);
+        res.render('searchItem', itemlist);
     };
 
   }
 )};
   if(category== "Technology"){
-      client.keys('item*',function(err, data){
+      client.keys('item*Technology',function(err, data){
         if(err){
             console.log(err);
         }
         else{
             let itemlist = {};
             for(let d=0; d<data.length; d++){
-                if(data[d].category== category){
                     let item= "catalog"+d;
                     itemlist[item]= data[d];
-                }
         }
-        res.render('item', itemlist);
+        res.render('searchItem', itemlist);
     };
 
   }
 )};
   if(category== "Appliances"){
-      client.keys('item*',function(err, data){
+      client.keys('item*Appliances',function(err, data){
         if(err){
             console.log(err);
         }
@@ -90,16 +85,37 @@ router.get('/item/:cat', function (req,res, next){
             let itemlist = {};
             for(let d=0; d<data.length; d++){
                 console.log(data[d].category);
-                if(data[d].category== category){
                     let item= "catalog"+d;
                     itemlist[item]= data[d];
-                }
         }
-        res.render('item', itemlist);
+        res.render('searchItem', itemlist);
     };
 
   }
 )};
 });
 
+router.get('/item/itemInfo/:catalog', function (req,res, next){
+    let catalog= String(req.params.catalog)
+
+    client.hgetall(catalog,function(err,obj){
+           if(!obj){
+               console.log(catalog);
+               res.render('index',{
+                   error: 'item does not exist',
+                   title: 'NO!'
+               });
+           }
+           else{
+               console.log(catalog);
+               obj.id = req.params.catalog;
+               res.render('itemDisplay',{
+                   item:obj
+               });
+           }
+       })
+
+
+
+});
 module.exports = router;
