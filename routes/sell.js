@@ -36,13 +36,13 @@ router.get('/test', function (req,res, next){
 
 router.post('/postGoods', function (req,res){
     console.log(req.body);
-    let item= req.body.item;
+    let name= req.body.item;
     let seller= req.body.seller;
     let category= req.body.category;
     let price= req.body.price;
 
-    client.hmset("item"+item+category, [
-        'name', item,
+    client.hmset("item"+name+category, [
+        'name', name,
         'seller', seller,
         'category', category,
         'price', price,

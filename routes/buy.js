@@ -13,13 +13,6 @@ router.get('/pickCategory', function (req,res, next){
 });
 
 
-router.delete('/delete/:item',function(req,res){
-    client.del(req.params.item);
-    res.redirect('/boughtGoods')
-});
-
-
-
 router.get('/category/:cat', function (req,res, next){
     let message= String(req.params.cat);
   res.render('category', {category: message});
@@ -96,7 +89,7 @@ router.get('/searchItem/:cat', function (req,res, next){
 });
 
 router.get('/item/itemInfo/:catalog', function (req,res, next){
-    let catalog= String(req.params.catalog)
+    let catalog= req.params.catalog;
 
     client.hgetall(catalog,function(err,obj){
            if(!obj){
@@ -107,7 +100,7 @@ router.get('/item/itemInfo/:catalog', function (req,res, next){
                });
            }
            else{
-               console.log(catalog);
+               console.log(obj);
                obj.id = req.params.catalog;
                res.render('itemDisplay',{
                    item:obj
@@ -117,5 +110,15 @@ router.get('/item/itemInfo/:catalog', function (req,res, next){
 
 
 
+});
+
+
+router.delete('/delete/:id',function(req,res){
+    client.del(req.params.id);
+    res.redirect('/buy/boughtGoods')
+});
+router.get('/boughtGoods', function (req,res, next){
+
+  res.render('boughtGoods');
 });
 module.exports = router;
